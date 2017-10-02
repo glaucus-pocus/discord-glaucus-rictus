@@ -1,0 +1,33 @@
+{
+  "name": "glaucus-rictus",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/rictus.js",
+  "scripts": {
+    "lint": "eslint --fix src",
+    "test": "eslint src"
+  },
+  "keywords": [],
+  "author": "Pandraghon",
+  "license": "MIT",
+  "homepage": "https://github.com/glaucus-pocus/discord-glaucus-rictus.git#readme",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/glaucus-pocus/discord-glaucus-rictus.git"
+  },
+  "bugs": {
+      "url": "https://github.com/glaucus-pocus/discord-glaucus-rictus/issues"
+  },
+  "dependencies": {
+    "discord.js": "github:hydrabolt/discord.js",
+    "klasa": "github:dirigeants/klasa",
+    "moment": "^2.18.1",
+    "xml2js-es6-promise": "^1.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1"
+  },
+  "engines": {
+    "node": ">=8.5.0"
+  }
+}
