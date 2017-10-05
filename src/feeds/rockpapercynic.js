@@ -5,19 +5,22 @@ module.exports = class extends Feed {
 	constructor(...args) {
 		super(...args, {
 			author: {
-				name: 'xkcd',
-				url: 'https://xkcd.com/',
+				name: 'Rock, Paper, Cynic',
+				url: 'http://www.rockpapercynic.com',
 				// eslint-disable-next-line camelcase
-				icon_url: 'https://www.google.com/s2/favicons?domain=xkcd.com'
+				icon_url: 'https://www.google.com/s2/favicons?domain=www.rockpapercynic.com'
 			},
-			url: 'https://xkcd.com/rss.xml'
+			url: 'http://rockpapercynic.tumblr.com/rss'
 		});
 	}
 
 	parse(item) {
 		const parsed = super.parse(item);
 		parsed.image = { url: /<img[^>]*src="([^"]*)"/.exec(parsed.description)[1] };
-		[, parsed.description] = /<img[^>]*title="([^"]*)"/.exec(parsed.description);
+		const description = /<p>(.*)<\/p>/.exec(parsed.description);
+		if (description) {
+			[, parsed.description] = description;
+		}
 		return parsed;
 	}
 
