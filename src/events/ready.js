@@ -11,7 +11,7 @@ module.exports = class extends Event {
 
 	async run() {
 		const { prefix } = this.client.config;
-		this.client.user.setActivity(`${prefix[prefix.length-1]}help`).catch(err => this.client.emit('log', err, 'error'));
+		this.client.user.setActivity(`${prefix[prefix.length - 1]}help`).catch(err => this.client.emit('log', err, 'error'));
 	}
 
 	/* eslint-disable no-empty-function */
