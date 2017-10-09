@@ -21,11 +21,16 @@ class Feed {
 		this.url = options.url || '';
 		this.frequency = options.frequency || 86400000;
 		this.lastUpdate = null;
+		this.handle = null;
 	}
 
 	async run() {
 		const response = await this.fetch();
 		this.send(response.rss.channel[0].item);
+	}
+
+	stop() {
+		clearTimeout(this.handle);
 	}
 
 	async fetch() {
@@ -47,6 +52,11 @@ class Feed {
 			.map(guild => guild.channels.get(guild.settings.channel));
 	}
 
+	get timeLeft() {
+		const time = this.lastUpdate ? this.frequency - moment().diff(this.lastUpdate) : 0;
+		return time > 0 ? time : 0;
+	}
+
 	async send(items) {
 		let updated = this.lastUpdate;
 		items = items.map(this.parse).filter(item => !updated || updated.isBefore(item.timestamp)).map(item => {
@@ -58,6 +68,9 @@ class Feed {
 		if (updated !== this.lastUpdate) {
 			this.lastUpdate = updated;
 			this.client.settings.feeds.update(this.name, { updated: updated.format() }, this.client.data.home);
+			this.handle = setTimeout(this.run.bind(this), this.timeLeft);
+		} else {
+			this.handle = setTimeout(this.run.bind(this), this.frequency);
 		}
 		this.channels.map(channel => items.map(embed => channel.sendEmbed(embed).catch(console.error)));
 	}
@@ -68,7 +81,7 @@ class Feed {
 		if (updated) {
 			this.lastUpdate = moment(updated);
 		}
-		this.run();
+		this.handle = setTimeout(this.run.bind(this), this.timeLeft);
 	}
 
 	// Technically left for more than just documentation
