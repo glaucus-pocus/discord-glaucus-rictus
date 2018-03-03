@@ -21,7 +21,7 @@
   "dependencies": {
     "discord.js": "github:hydrabolt/discord.js",
     "klasa": "github:dirigeants/klasa",
-    "moment": "^2.19.3",
+    "moment": "^2.21.0",
     "xml2js-es6-promise": "^1.1.1"
   },
   "devDependencies": {
