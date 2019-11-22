@@ -25,7 +25,7 @@
     "xml2js-es6-promise": "^1.1.1"
   },
   "devDependencies": {
-    "eslint": "^4.12.1"
+    "eslint": "^6.7.0"
   },
   "engines": {
     "node": ">=8.5.0"
